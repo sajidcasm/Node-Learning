@@ -1,0 +1,67 @@
+node js is runtime for js , not any lang
+
+web browser run on client computer so js donot handle things on server, therefore we cannot connect DB directly , cannot handle file system with client side etc .
+
+Q. why do we need node ? 
+-> because for unified language , high performance and data streaming .
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+
+languages : 
+C-> compiler
+Java ->JVM
+JS -> JS engine
+
+chrome : V8 engine 
+firefox : spidermonkey
+safari: JScore,
+
+node provides
+- FS
+-http
+-path
+-os
+-net
+-DB drivers 
+
+fs is not possible in browser js  
+
+//////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////
+
+1995 web pages were static (html+css only)
+
+companies thought user browser me hi koi language hotoo lightwght jo page ko dynamic bana ske :JSjs was created for browser not for server 
+
+nodejs = v8 engine + os level apis
+
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+
+type of modules in node : 
+->core module 
+-> third party module
+-> custom module
+
+Q. Global object kya hai ?
+->is an object which is available in all modules (files) by default , eg :console 
+eg : console.log();
+
+chahen to isko import bhi kr skte hain 
+check node2.js (in root folder) ;
+
+
+//////////////////////////////////////////////////////////////////////////////
+
+Feature                     Browser                            Node JS
+
+environment                runs on browser                   run on system via nodejs
+
+global object              "window"                            "global"
+
+dom access                  yes                                 no
+
+apis                       fetch, local storage                fs,http 
+
+//
+now we will create a server in node js 
