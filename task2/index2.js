@@ -62,6 +62,11 @@ const server = http.createServer((req, resp) => {
             let readableData = queryString.parse(rawData);
             console.log(readableData);
 
+            const textData = `Name: ${readableData.name}\nEmail: ${readableData.email}\nMessage: ${readableData.message}\n\n`;
+            fs.writeFileSync("text/"+readableData.name+".txt", textData);
+
+            console.log("Data Written to File");
+
             resp.writeHead(200);
 
             resp.end("Form Submitted");
