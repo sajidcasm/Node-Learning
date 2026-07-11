@@ -15,39 +15,37 @@ const con = new Client({
   password: "sajidali",
 });
 
+
+
 try {
   await con.connect();
   console.log("Connected to database");
   console.log("hello sajid");
 
-  //   const res = await con.query("SELECT * FROM demotable");
-  //   console.log("Response:", res.rows);
 } catch (err) {
   console.error("Error:", err);
 }
 
-app.get("min-max", () => {});
 
+app.get('/fetchbyid/:id', (req,res)=>{
+    const id = req.params.id ;
 
+    const fetch_query = 'SELECT * FROM demotable2 WHERE  id = $1'
+    //  yaha id === columns name hai 
 
+    con.query(fetch_query, [id], (err, result)=>{
+        //  this id in sq bracmket it params wala ok, $1 se pick hoga ye esa!
 
-app.get('/fetch-all', (req,res)=>{
-
-    const fetch_query = 'SELECT * FROM demotable2';
-
-    con.query(fetch_query, (error,result)=>{
-
-        if(error){
-
-            res.send(error);
-            console.log(error);
+        if(err){
+            res.send(err);
+            console.log(err);
 
         }else{
 
-            res.send(result?.rows);
-            console.log(result?.rows);
+            res.send(result.rows);
 
         }
+
     })
 
 })
@@ -58,4 +56,6 @@ app.listen(3000, () => {
   console.log("Server is running on port 3000");
 });
 
-// simple fetch all 
+
+//  how to fetch data by id 
+//w orks fine bs konsa kya run krna h wo dhyan krhna hoga proper !

@@ -18,6 +18,8 @@ const con = new Client({
   password: "sajidali",
 });
 
+// simple post data
+
 try {
   await con.connect();
   console.log("Connected to database");
