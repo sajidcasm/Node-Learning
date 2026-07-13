@@ -1,3 +1,4 @@
+require("dotenv").config();
 console.log("test hello from appjs ");
 
 const express = require("express");
@@ -7,11 +8,7 @@ const path = require("path");
 
 const database = require('./database.js')
 
-
-
 const PORT = process.env.PORT || 5000;
-
-
 
 const app = express();
 
