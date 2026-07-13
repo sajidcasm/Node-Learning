@@ -1,0 +1,21 @@
+types of middle ware : 
+
+1. application level : app.use, app.get
+
+2. router level router.use();
+
+3. built in : express
+
+4. error handling (err,req,res,next);
+
+5. 
+
+third party 
+
+////////////////////////////////////////
+
+
+built in middle were like body parser, 
+express static urlencoded extend true false ye sb hote h 
+
+ejs template wagera b hai but not that much important , bs mvc me show krne k lie esa!
