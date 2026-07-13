@@ -63,3 +63,4 @@ con.query(insert_query, [name, id], (error, result) => {
 app.listen(3000, () => {
   console.log("Server is running on port 3000");
 });
+// ss

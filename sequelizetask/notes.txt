@@ -1,0 +1,103 @@
+ORM kya hai?
+
+ORM = Object Relational Mapping
+
+Ye ek library/technology hai jo tumhare JavaScript objects ko SQL database se connect karti hai.
+
+ORM tumhare JavaScript code ko SQL queries me convert karta hai.
+
+Tum likhte ho:
+await User.findAll();
+
+ORM isko andar hi andar convert karta hai:
+SELECT * FROM users;
+
+Aur tum likhte ho:
+await User.create({
+  name: "Sajid",
+  age: 23,
+});
+
+cnvert krta hai : 
+INSERT INTO users(name, age)
+VALUES ('Sajid', 23);
+
+
+2. Model kya hai?
+Model ORM ke andar banaya hua object hota hai jo ek table ko represent karta hai.
+
+
+example :
+users
+------
+id
+name
+email
+age
+
+
+Backend: ORM 
+const User = sequelize.define("User", {
+  name: DataTypes.STRING,
+  email: DataTypes.STRING,
+  age: DataTypes.INTEGER,
+});
+
+Ye User hi Model hai.
+
+User.findAll();
+User.create();
+User.update();
+User.destroy();
+
+
+
+
+Relationship samjho
+
+Database
+     ▲
+     │
+    ORM (Sequelize)
+     ▲
+     │
+Model (User)
+     ▲
+     │
+Controller
+
+Sequelize ek ORM (Object Relational Mapping) library hai jo Node.js me SQL databases ke saath kaam karne ke liye use hoti hai.
+
+Iska kaam hai JavaScript aur SQL ke beech bridge banna.
+
+Without Sequelize (Raw SQL)
+const query = `
+  SELECT * FROM users WHERE id = 1
+`;
+
+await client.query(query);
+
+
+
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Without Sequelize (Raw SQL)
+
+const query = `
+  SELECT * FROM users WHERE id = 1
+`;
+
+await client.query(query);
+
+
+With Sequelize (ORM) : : 
+const user = await User.findByPk(1);
+
