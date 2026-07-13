@@ -2,7 +2,7 @@
 
 const Sequelize = require ('sequelize');
 
- new Sequelize('sequelize_db', 'postgres', 'sajidali123', {
+ module.exports = new Sequelize('sequelize_db', 'postgres', 'sajidali', {
     // db , username, password 
     host:'localhost',
     dialect: 'postgres',
