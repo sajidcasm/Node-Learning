@@ -19,3 +19,5 @@ built in middle were like body parser,
 express static urlencoded extend true false ye sb hote h 
 
 ejs template wagera b hai but not that much important , bs mvc me show krne k lie esa!
+
+mvc pattern imp hai 
