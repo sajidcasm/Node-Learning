@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import sequelize from "./config/db.js";
+import authRoutes from "./routes/authRoutes.js";
 
 dotenv.config();
 
@@ -26,6 +27,8 @@ const connectDB = async () => {
 };
 
 connectDB();
+
+app.use("/api", authRoutes);
 
 // Start Server
 const PORT = process.env.PORT || 5000;
