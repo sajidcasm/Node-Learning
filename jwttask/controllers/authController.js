@@ -4,12 +4,6 @@ import generateToken from "../utils/generateToken.js";
 
 export const signup = async (req, res) => {
   try {
-    // console.log(req.body);
-    // res.status(200).json({
-    //   success: true,
-    //   message: "Signup Controller Hit",
-    // });
-
     const { name, email, phone_number, password } = req.body;
 
     if (!name || !email || !phone_number || !password) {
@@ -31,9 +25,27 @@ export const signup = async (req, res) => {
       });
     }
 
-    res.status(200).json({
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const user = await User.create({
+      name,
+      email,
+      phone_number,
+      password: hashedPassword,
+    });
+
+    const token = generateToken(user);
+
+    return res.status(200).json({
       success: true,
-      message: "Signup Controller Hit",
+      message: "User registered successfully",
+      accessToken: token,
+      data: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        phone_number: user.phone_number,
+      },
     });
   } catch (error) {
     console.log(error);
@@ -42,11 +54,55 @@ export const signup = async (req, res) => {
 
 export const login = async (req, res) => {
   try {
-    console.log(req.body);
+    // console.log(req.body);
+    // res.status(200).json({
+    //   success: true,
+    //   message: "Login Controller Hit",
+    // });
+
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      return res.status(400).json({
+        success: false,
+        message: "Email and password are required",
+      });
+    }
+
+    const user = await User.findOne({
+      where: {
+        email,
+      },
+    });
+
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        message: "Invalid email or password",
+      });
+    }
+
+    const isPasswordMatch = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordMatch) {
+      return res.status(401).json({
+        success: false,
+        message: "Invalid email or password",
+      });
+    }
+
+    const token = generateToken(user);
 
     res.status(200).json({
       success: true,
-      message: "Login Controller Hit",
+      message: "Login successful",
+      token,
+      data: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        phone_number: user.phone_number,
+      },
     });
   } catch (error) {
     console.error(error);

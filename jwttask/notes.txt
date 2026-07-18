@@ -8,3 +8,66 @@ Backend Status	Axios me kya hoga?
 404       Not Found	catch
 409       Conflict	catch
 500       Internal Server Error	catch
+
+
+//npm install --save-dev sequelize-cli - > ye install kiya 
+// npx sequelize-cli --version
+
+//❌ Abhi sequelize-cli init mat chalana.
+Kyuki init default structure banata hai aur tumhara project already organized hai.
+
+// sare setup k bad 
+npx sequelize-cli migration:generate --name add-city-state-to-user
+
+
+
+// async up(quer -> upgrade function he ye 
+Jab tum ye command chalaoge:
+npx sequelize-cli db:migrate
+to sirf up() chalega.
+
+Yahi function database ko modify karega.
+
+
+async down(queryInte -> ye rollback function hai 
+Jab tum chalaoge: npx sequelize-cli db:migrate:undo
+to sirf down() execute hoga.
+
+Yahi database ko previous state me le jayega.
+
+Ab queryInterface kya hai?
+queryInterface = Sequelize ka database controller
+Ye database ke saath directly interact karta hai.
+Jaise iske paas methods hain:
+
+queryInterface.createTable()
+
+queryInterface.dropTable()
+
+queryInterface.addColumn()
+
+queryInterface.removeColumn()
+
+queryInterface.renameColumn()
+
+queryInterface.changeColumn()
+
+
+
+Ab humara task kya hai?
+
+user
+
+id
+name
+email
+phone_number
+password
+createdAt
+updatedAt
+
+Hume add karna hai:
+
+
+city
+state
