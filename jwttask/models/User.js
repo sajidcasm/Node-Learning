@@ -27,12 +27,20 @@ const User = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    city: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+
+    state: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
   },
   {
     tableName: "user",
     timestamps: false,
   },
 );
-
 
 export default User;
