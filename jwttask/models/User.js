@@ -42,5 +42,6 @@ const User = sequelize.define(
     timestamps: false,
   },
 );
+// after migration u gotta add new fields init esa 
 
 export default User;
