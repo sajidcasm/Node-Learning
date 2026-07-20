@@ -1,0 +1,31 @@
+jwt.sign(payload, secret, options)
+//////////////////////////////////////////////
+
+const payload = {
+  id: 7,
+  email: "alim@gmail.com",
+};
+//////////////////////////////////////////////
+
+jwt.sign(
+  {
+    id: 7,
+    email: "alim@gmail.com",
+  },
+  ...
+);
+//////////////////////////////////////////////
+secret => process.env.JWT_SECRET
+//////////////////////////////////////////////
+
+
+jwt.sign(
+  {
+    id: 7,
+    email: "alim@gmail.com",
+  },
+  "mysecret123",
+  {
+    expiresIn: "7d",
+  }
+);

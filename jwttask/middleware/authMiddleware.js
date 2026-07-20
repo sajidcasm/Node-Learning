@@ -4,6 +4,8 @@ const authMiddleware = (req, res, next) => {
   try {
     const authHeader = req.headers.authorization;
 
+    console.log(req.headers);
+
     if (!authHeader) {
       return res.status(401).json({
         success: false,
@@ -12,6 +14,8 @@ const authMiddleware = (req, res, next) => {
     }
 
     const token = authHeader.split(" ")[1];
+    // Bearer eyfabjdsvabf38djcasdvjbasdvsadkvsadvbsdvihaivbafsdivaf
+    // token = eyfabjdsvabf38djcasdvjbasdvsadkvsadvbsdvihaivbafsdivaf
 
     if (!token) {
       return res.status(401).json({
