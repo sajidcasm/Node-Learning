@@ -71,3 +71,8 @@ Hume add karna hai:
 
 city
 state
+
+
+npx sequelize-cli migration:generate --name add-token-version-to-user
+// sequelize for token state
+ npx sequelize-cli db:migrate

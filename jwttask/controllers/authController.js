@@ -91,6 +91,9 @@ export const login = async (req, res) => {
       });
     }
 
+    user.token_version += 1;
+    await user.save();
+
     const token = generateToken(user);
 
     res.status(200).json({

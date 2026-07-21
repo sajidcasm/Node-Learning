@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
+import User from "../models/User.js";
 
-const authMiddleware = (req, res, next) => {
+const authMiddleware = async (req, res, next) => {
   try {
     const authHeader = req.headers.authorization;
 
@@ -26,6 +27,22 @@ const authMiddleware = (req, res, next) => {
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
+    const user = await User.findByPk(decoded.id);
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    if (decoded.tokenVersion !== user.token_version) {
+      return res.status(401).json({
+        success: false,
+        message: "Token has been revoked. Please login again.",
+      });
+    }
+
     req.user = decoded;
 
     next();
@@ -38,3 +55,6 @@ const authMiddleware = (req, res, next) => {
 };
 
 export default authMiddleware;
+
+
+// sb flow ekdum ache se smjhna hia basic se bcche ki trh 

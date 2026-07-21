@@ -36,12 +36,18 @@ const User = sequelize.define(
       type: DataTypes.STRING,
       allowNull: true,
     },
+
+    token_version: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0,
+    },
   },
   {
     tableName: "user",
     timestamps: false,
   },
 );
-// after migration u gotta add new fields init esa 
+// after migration u gotta add new fields init esa
 
 export default User;
