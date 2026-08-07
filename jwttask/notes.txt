@@ -76,3 +76,8 @@ state
 npx sequelize-cli migration:generate --name add-token-version-to-user
 // sequelize for token state
  npx sequelize-cli db:migrate
+
+  npx sequelize-cli db:migrate
+
+
+  https://chatgpt.com/share/6a756c16-7470-83ee-9db3-93607e314dd0

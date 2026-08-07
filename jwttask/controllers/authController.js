@@ -1,4 +1,5 @@
 import User from "../models/User.js";
+import KycVerification from "../models/KycVerification.js";
 import bcrypt from "bcrypt";
 import generateToken from "../utils/generateToken.js";
 
@@ -123,6 +124,13 @@ export const getProfile = async (req, res) => {
       attributes: {
         exclude: ["password"],
       },
+      include: [
+        {
+          model: KycVerification,
+          attributes: ["status"],
+          required: false,
+        },
+      ],
     });
 
     if (!user) {
