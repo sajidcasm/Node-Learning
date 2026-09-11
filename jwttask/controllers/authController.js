@@ -1,5 +1,7 @@
 import User from "../models/User.js";
 import KycVerification from "../models/KycVerification.js";
+const { OAuth2Client } = require("google-auth-library");
+const jwt = require("jsonwebtoken");
 import bcrypt from "bcrypt";
 import generateToken from "../utils/generateToken.js";
 import sendOtpEmail from "../utils/sendOtpEmail.js";
@@ -237,6 +239,80 @@ export const getProfile = async (req, res) => {
     return res.status(500).json({
       success: false,
       message: "Internal Server Error",
+    });
+  }
+};
+
+
+
+
+const googleClient = new OAuth2Client(
+  process.env.GOOGLE_CLIENT_ID
+);
+
+export const googleLogin = async (req, res) => {
+  try {
+    const { credential } = req.body;
+
+    // Google token verify
+    const ticket = await googleClient.verifyIdToken({
+      idToken: credential,
+      audience: process.env.GOOGLE_CLIENT_ID,
+    });
+
+    // Google user information
+    const payload = ticket.getPayload();
+
+    const {
+      sub: googleId,
+      email,
+      name,
+      picture,
+    } = payload;
+
+    console.log({
+      googleId,
+      email,
+      name,
+      picture,
+    });
+
+    // DB me user check karo
+    let user = await User.findOne({ email });
+
+    // User nahi hai -> create
+    if (!user) {
+      user = await User.create({
+        googleId,
+        email,
+        name,
+        profileImage: picture,
+      });
+    }
+
+    // Apna JWT
+    const token = jwt.sign(
+      {
+        userId: user._id,
+      },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "7d",
+      }
+    );
+
+    return res.status(200).json({
+      success: true,
+      token,
+      user,
+    });
+
+  } catch (error) {
+    console.error(error);
+
+    return res.status(401).json({
+      success: false,
+      message: "Google login failed",
     });
   }
 };
