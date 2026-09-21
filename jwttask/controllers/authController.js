@@ -176,12 +176,12 @@ export const login = async (req, res) => {
       });
     }
 
-    if (!user.is_verified) {
-      return res.status(403).json({
-        success: false,
-        message: "Please verify your email before logging in",
-      });
-    }
+    // if (!user.is_verified) {
+    //   return res.status(403).json({
+    //     success: false,
+    //     message: "Please verify your email before logging in",
+    //   });
+    // }
 
     user.token_version += 1;
     await user.save();
