@@ -1,12 +1,12 @@
 import User from "../models/User.js";
 import KycVerification from "../models/KycVerification.js";
-const { OAuth2Client } = require("google-auth-library");
-const jwt = require("jsonwebtoken");
+import { OAuth2Client } from "google-auth-library";
+import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import generateToken from "../utils/generateToken.js";
 import sendOtpEmail from "../utils/sendOtpEmail.js";
 
-const generateOtp = () => Math.floor(100000 + Math.random() * 900000).toString();
+// const generateOtp = () => Math.floor(100000 + Math.random() * 900000).toString();
 
 export const signup = async (req, res) => {
   try {
@@ -33,26 +33,29 @@ export const signup = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const otp = generateOtp();
-    const otpExpiresAt = new Date(Date.now() + 10 * 60 * 1000);
+    // OTP wala flow abhi ke liye disable kiya hai, simple signup rakha hai
+    // const otp = generateOtp();
+    // const otpExpiresAt = new Date(Date.now() + 10 * 60 * 1000);
 
     const user = await User.create({
       name,
       email,
       phone_number,
       password: hashedPassword,
-      otp_code: otp,
-      otp_expires_at: otpExpiresAt,
+      // otp_code: otp,
+      // otp_expires_at: otpExpiresAt,
     });
 
-    await sendOtpEmail(user.email, otp);
+    // await sendOtpEmail(user.email, otp);
 
     return res.status(200).json({
       success: true,
-      message: "OTP sent to your email. Please verify to continue.",
+      message: "Signup successful",
       data: {
         id: user.id,
+        name: user.name,
         email: user.email,
+        phone_number: user.phone_number,
       },
     });
   } catch (error) {
@@ -245,7 +248,7 @@ export const getProfile = async (req, res) => {
 
 
 
-
+// google login doesnt work, just kept code for future reference 
 const googleClient = new OAuth2Client(
   process.env.GOOGLE_CLIENT_ID
 );

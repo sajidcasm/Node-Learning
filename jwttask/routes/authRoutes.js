@@ -31,6 +31,6 @@ router.post("/signup", signup);
 router.post("/verify-otp", verifyOtp);
 router.post("/login", login);
 router.get("/profile", authMiddleware, getProfile);
-router.get("/google-login", googleLogin);
+// router.get("/google-login", googleLogin);
 
 export default router;
